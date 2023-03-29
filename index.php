@@ -1,7 +1,9 @@
+
+<body>
   <div class="wrapper">
     <img src="logo.png" alt="">
 
-    <form action="app.php" method="post" enctype="multipart/form-data">
+    <form action="/app.php" method="post" enctype="multipart/form-data">
       <label for="idioma">Paso 1: Escoge el idioma.</label>
       <select name="idioma" id="">
         <option value="en">Inglés</option>
