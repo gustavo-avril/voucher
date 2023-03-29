@@ -1,0 +1,46 @@
+.flex {
+	width: 100%;
+	display: flex;
+}
+.info {
+	width: 65%;
+	font-size: 11px;
+	float: left;
+	line-height: 1.1;
+}
+
+.voucher {
+	color: #00ffff;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: 'Times New Roman', Times, serif;
+}
+.titulo {
+	text-align: center;
+	color: #00ffff;
+	font-family: 'arial', sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+.logo {
+	width: 35%;
+	float: right;
+}
+
+.footnote {
+	font-family: 'arial', sans-serif;
+	font-size: 10px;
+	text-align: justify;
+	line-height: 1.1;
+}
+
+table {
+	width: 90%;
+	font-family: 'arial', sans-serif;
+	font-size: 10px;
+	line-height: 0.8;
+	text-align: justify;
+	margin: 0 auto;
+}

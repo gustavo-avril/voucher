@@ -1,0 +1,4 @@
++ Upload and process multiple files.
++ Make the plan selection more secure
++ Drag and drop functionality
++ Improve the font (lato, or another google font)
