@@ -30,7 +30,7 @@ $text = $pdf->getText();
 //echo $text;
 preg_match('/VOUCHER Nº:(.*)/', $text, $voucher);
 preg_match('/NOMBRE:(.*)/', $text, $nombre);
-preg_match('/NOMBRE:(.*)/', $text, $nombre2);
+//preg_match('/NOMBRE:(.*)/', $text, $nombre2);
 preg_match('/DNI (.*)/', $text, $dni);
 preg_match('/PASAPORTE (.*)/', $text, $pasaporte);
 preg_match('/FECHA DE NACIMIENTO: (.*)/', $text, $dob);
@@ -47,12 +47,12 @@ $mpdf = new \Mpdf\Mpdf();
 ob_start();
 $stylesheet = file_get_contents('style.css');
 // get the Customer Information in English
-function customerInfo ($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, $tpl){
+function customerInfo ($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, $tpl){ //$nombre2,
   echo "
   <div class='flex'>
     <div class='info'>
       <p class='voucher'>VOUCHER: {$voucher[1]}</p>
-      <p>LAST AND FIRST NAME:{$nombre[1]}{$nombre2[1]}<br />
+      <p>LAST AND FIRST NAME:{$nombre[1]}<br />
       ID/PASSPORT: {$dni[1]}{$pasaporte[1]}<br />
       DATE OF BIRTH: {$dob[1]}<br />
       PLAN: {$planVoucher[1]}<br />
@@ -72,12 +72,12 @@ function customerInfo ($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $pla
 }
 
 // get the Customer Information in Portuguese
-function customerInfoBr ($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, $tpl){
+function customerInfoBr ($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, $tpl){ //$nombre2,
   echo "
   <div class='flex'>
     <div class='info'>
       <p class='voucher'>VOUCHER: {$voucher[1]}</p>
-      <p>Sobrenome e nome: {$nombre[1]}{$nombre2[1]}<br />
+      <p>Sobrenome e nome: {$nombre[1]}<br />
       Passporte: {$dni[1]}{$pasaporte[1]}<br />
       Data de nascimento: {$dob[1]}<br />
       Plano: {$planVoucher[1]}<br />
@@ -97,7 +97,7 @@ function customerInfoBr ($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $p
 }
 
 if($plan === 'inf-15' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf15en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf15en.html'); //$nombre2,
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);
@@ -105,7 +105,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-25' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25en.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -113,7 +113,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '25-pro' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25proen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -121,7 +121,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-40' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40en.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -129,7 +129,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '40-pro' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40proen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);
@@ -137,7 +137,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf40-proEU' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUproen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUproen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -145,7 +145,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-60' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60en.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -153,7 +153,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '60-pro' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60proen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);
@@ -161,7 +161,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-80' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80en.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -169,7 +169,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '80-pro' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80proen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);
@@ -177,7 +177,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-25' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25en.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -185,7 +185,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-25-pro' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25proen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -193,7 +193,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-40' && $idioma === 'en'){
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40en.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40en.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -201,7 +201,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-40-pro' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40proen.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -209,7 +209,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '30-proEU' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf30EUen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf30EUen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -217,7 +217,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === '40-proEU' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -225,7 +225,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-50-pro' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre50proEUen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre50proEUen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -233,7 +233,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-60-pro' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre60proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre60proen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -241,7 +241,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-80-pro' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre80proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre80proen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -249,7 +249,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-100-pro' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre100proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre100proen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -257,7 +257,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-150-pro' && $idioma === 'en'){  
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre150proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre150proen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -265,7 +265,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-250-pro' && $idioma === 'en'){ 
-  customerInfo($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre250proen.html');
+  customerInfo($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre250proen.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -273,7 +273,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'inf-15' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf15br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf15br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -281,7 +281,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-25' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -289,7 +289,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '25-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf25probr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -297,7 +297,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '30-proEU' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf30EUbr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf30EUbr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -305,7 +305,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '40-proEU' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUbr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUbr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -313,7 +313,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'pre-50-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre50proEUbr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre50proEUbr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -321,7 +321,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-40' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -329,7 +329,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf40-proEU' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUpro.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40EUpro.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -337,7 +337,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '40-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf40probr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -345,7 +345,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-60' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -353,7 +353,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '60-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf60probr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -361,7 +361,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'inf-80' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -369,7 +369,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === '80-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'inf80probr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -377,7 +377,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-25' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -385,7 +385,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-25-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg25probr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -393,7 +393,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-40' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40br.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40br.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -401,7 +401,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'reg-40-pro' && $idioma === 'br'){
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'reg40probr.html');
   $template = ob_get_contents();
   ob_end_clean();
   $mpdf->WriteHTML($stylesheet,1);	
@@ -409,7 +409,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D'); 
   echo $html;
 }elseif($plan === 'pre-60-pro' && $idioma === 'br'){ 
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre60probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre60probr.html');
   $template = ob_get_contents();
   ob_end_clean(); 
   $mpdf->WriteHTML($stylesheet,1);	
@@ -417,7 +417,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-80-pro' && $idioma === 'br'){ 
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre80probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre80probr.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -425,7 +425,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-100-pro' && $idioma === 'br'){ 
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre100probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre100probr.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -433,7 +433,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-150-pro' && $idioma === 'br'){  
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre150probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre150probr.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	
@@ -441,7 +441,7 @@ if($plan === 'inf-15' && $idioma === 'en'){
   $mpdf->Output($idioma . '-' . $filename, 'D');   
   echo $html;
 }elseif($plan === 'pre-250-pro' && $idioma === 'br'){ 
-  customerInfoBr($voucher, $nombre, $nombre2, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre250probr.html');
+  customerInfoBr($voucher, $nombre, $dni, $pasaporte, $dob, $planVoucher, $destino, $from, $to, $emision, $contacto, $tlf, $agencia, 'pre250probr.html');
   $template = ob_get_contents();
   ob_end_clean();  
   $mpdf->WriteHTML($stylesheet,1);	

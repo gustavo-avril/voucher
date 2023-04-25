@@ -1,9 +1,17 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Avril Voucher</title>
+</head>
 <body>
   <div class="wrapper">
     <img src="logo.png" alt="">
 
-    <form action="/app.php" method="post" enctype="multipart/form-data">
+    <form action="app.php" method="post" enctype="multipart/form-data">
       <label for="idioma">Paso 1: Escoge el idioma.</label>
       <select name="idioma" id="">
         <option value="en">Inglés</option>
@@ -43,3 +51,6 @@
       <input class="procesar" type="submit" name="submit" value="Procesar">
     </form>
   </div>
+
+</body>
+</html>
